@@ -1,0 +1,27 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "{{.Description}}",
+        "title": "{{.Title}}",
+        "contact": {},
+        "license": {},
+        "version": "{{.Version}}"
+    },
+    "host": "{{.Host}}",
+    "basePath": "{{.BasePath}}",
+    "paths": {
+        "/status": {
+            "get": {
+                "description": "Status check",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Health check URL",
+                "operationId": "status",
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    }
+}

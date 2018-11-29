@@ -1,0 +1,19 @@
+basePath: '{{.BasePath}}'
+host: '{{.Host}}'
+info:
+  contact: {}
+  description: '{{.Description}}'
+  license: {}
+  title: '{{.Title}}'
+  version: '{{.Version}}'
+paths:
+  /status:
+    get:
+      description: Status check
+      operationId: status
+      produces:
+      - application/json
+      responses:
+        "200": {}
+      summary: Health check URL
+swagger: "2.0"
