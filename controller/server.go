@@ -1,6 +1,9 @@
-package quotes
+package controller
 
 import (
+	"math/rand"
+	"time"
+
 	_ "github.com/bbriggs/quotes/docs"
 	"github.com/gin-gonic/gin"
 	//"github.com/sirupsen/logrus"
@@ -20,15 +23,24 @@ import (
 // @host localhost:8080
 // @BasePath /
 
+type Server struct {
+	Random *rand.Rand  // Initialized PRNG
+	API    *gin.Engine // Gin router
+}
+
 func Run() {
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
+	s := &Server{
+		Random: rand.New(rand.NewSource(time.Now().UnixNano())),
+		API:    gin.Default(),
+	}
+	s.API.GET("/", func(c *gin.Context) {
 		c.String(200, "Quotes\n")
 	})
-	r.GET("/status", statusGET)
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	s.API.GET("/fallout/raider", s.raiderGET)
+	s.API.GET("/status", s.statusGET)
+	s.API.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	r.Run() // listen and serve on 0.0.0.0:8080
+	s.API.Run() // listen and serve on 0.0.0.0:8080
 }
 
 // statusGET godoc
@@ -38,7 +50,7 @@ func Run() {
 // @Produce json
 // @Success 200
 // @router /status [get]
-func statusGET(c *gin.Context) {
+func (s *Server) statusGET(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"status": "ok",
 	})

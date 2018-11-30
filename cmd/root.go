@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/bbriggs/quotes/quotes"
+	"github.com/bbriggs/quotes/controller"
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -37,7 +37,7 @@ var rootCmd = &cobra.Command{
 	Use:   "quotes",
 	Short: "A small webapp to serve quotes over HTTP",
 	Run: func(cmd *cobra.Command, args []string) {
-		quotes.Run()
+		controller.Run()
 	},
 }
 

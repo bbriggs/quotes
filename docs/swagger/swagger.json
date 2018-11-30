@@ -10,6 +10,25 @@
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/fallout/raider": {
+            "get": {
+                "description": "Get a random quote from a Raider NPC",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Raider quotes",
+                "operationId": "raider",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/status": {
             "get": {
                 "description": "Status check",
@@ -20,6 +39,16 @@
                 "operationId": "status",
                 "responses": {
                     "200": {}
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Response": {
+            "type": "object",
+            "properties": {
+                "quote": {
+                    "type": "string"
                 }
             }
         }

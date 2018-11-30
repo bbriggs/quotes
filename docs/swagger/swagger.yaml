@@ -1,4 +1,10 @@
 basePath: '{{.BasePath}}'
+definitions:
+  model.Response:
+    properties:
+      quote:
+        type: string
+    type: object
 host: '{{.Host}}'
 info:
   contact: {}
@@ -7,6 +13,19 @@ info:
   title: '{{.Title}}'
   version: '{{.Version}}'
 paths:
+  /fallout/raider:
+    get:
+      description: Get a random quote from a Raider NPC
+      operationId: raider
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+            type: object
+      summary: Raider quotes
   /status:
     get:
       description: Status check
