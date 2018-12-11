@@ -29,6 +29,25 @@
                 }
             }
         },
+        "/plots/christmas": {
+            "get": {
+                "description": "Generate a random, whacky Christmas movie plot",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Randomized Christmas movie plots",
+                "operationId": "christmas-plots",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/status": {
             "get": {
                 "description": "Status check",
@@ -39,6 +58,25 @@
                 "operationId": "status",
                 "responses": {
                     "200": {}
+                }
+            }
+        },
+        "/trd/pikachu": {
+            "get": {
+                "description": "Find out what your face is",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Patrick Carver Simulation Machine",
+                "operationId": "your-face",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
                 }
             }
         }
