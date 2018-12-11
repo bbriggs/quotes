@@ -37,6 +37,7 @@ func Run() {
 		c.String(200, "Quotes\n")
 	})
 	s.API.GET("/fallout/raider", s.raiderGET)
+	s.API.GET("/trd/pikachu", s.yourFaceGET)
 	s.API.GET("/plots/christmas", s.christmasPlotsGET)
 	s.API.GET("/status", s.statusGET)
 	s.API.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
