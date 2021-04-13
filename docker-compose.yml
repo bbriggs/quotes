@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  # TODO
+  quotes:
+    build: .
+  hasura:
+    image: hasura/graphql-engine
+    environment:
+            HASURA_GRAPHQL_DATABASE_URL: "postgres://${QUOTES_DB_USER:-quotes}:${QUOTES_DB_PASSWORD:-quotes}@${QUOTES_DB_HOST:-db}:5432/${QUOTES_DB_NAME:-db}"
+  db:
+    image: postgres:13.2
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432" # Change port?
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${QUOTES_DB_NAME:-quotes}
+      POSTGRES_USER: ${QUOTES_DB_USER:-quotes}
+      POSTGRES_PASSWORD: ${QUOTES_DB_PASS:-quotes}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $QUOTES_DB_USER"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
